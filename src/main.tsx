@@ -1,7 +1,7 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
 import App from "./App";
-import type { MoviesByCategory } from "./App";
+import type { MoviesByCategory } from "./types";
 import "./styles/main.scss";
 
 declare global {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import type { Movie } from "../App";
+//import type { Movie } from "../App";
+import type { Movie } from "../types";
 
 interface CarouselProps {
   movies: Movie[];
