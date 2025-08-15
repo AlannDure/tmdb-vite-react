@@ -6,39 +6,28 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ movies }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
-  const prev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? movies.length - 1 : prevIndex - 1
-    );
-  };
-
-  const next = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === movies.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  if (movies.length === 0) return <p>No movies to show</p>;
-
-  const currentMovie = movies[currentIndex];
+  const next = () => setCurrent((prev) => (prev + 1) % movies.length);
+  const prev = () =>
+    setCurrent((prev) => (prev - 1 + movies.length) % movies.length);
 
   return (
     <div className="carousel">
-      <button className="carousel-btn left" onClick={prev}>
-        ◀
+      <button className="carousel-btn" onClick={prev}>
+        ‹
       </button>
-      <div className="carousel-card">
-        <img
-          src={`https://image.tmdb.org/t/p/w300${currentMovie.poster_path}`}
-          alt={currentMovie.title}
-        />
-        <h2>{currentMovie.title}</h2>
-        <p>{currentMovie.overview}</p>
-      </div>
-      <button className="carousel-btn right" onClick={next}>
-        ▶
+      {movies.length > 0 && (
+        <div className="carousel-card">
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movies[current].poster_path}`}
+            alt={movies[current].title}
+          />
+          <p>{movies[current].title}</p>
+        </div>
+      )}
+      <button className="carousel-btn" onClick={next}>
+        ›
       </button>
     </div>
   );

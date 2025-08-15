@@ -1,16 +1,20 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
 import App from "./App";
-import type { Movie } from "./App";
+import type { MoviesByCategory } from "./App";
 import "./styles/main.scss";
 
 declare global {
   interface Window {
-    __INITIAL_DATA__?: Movie[];
+    __INITIAL_DATA__?: MoviesByCategory;
   }
 }
 
-const initialData: Movie[] = window.__INITIAL_DATA__ || [];
+const initialData = window.__INITIAL_DATA__ ?? {
+  popular: [],
+  topRated: [],
+  upcoming: [],
+};
 
 hydrateRoot(
   document.getElementById("root")!,
