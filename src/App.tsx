@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchPopularMovies } from "./api/tmbd";
+import Carousel from "./components/Carousel";
 
 export interface Movie {
   id: number;
@@ -24,18 +25,7 @@ const App: React.FC<AppProps> = ({ initialMovies = [] }) => {
   return (
     <div className="app">
       <h1>Popular Movies</h1>
-      <div className="movies-grid">
-        {movies.map((movie) => (
-          <div key={movie.id} className="movie-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
-            />
-            <h2>{movie.title}</h2>
-            <p>{movie.overview}</p>
-          </div>
-        ))}
-      </div>
+      <Carousel movies={movies} />
     </div>
   );
 };
