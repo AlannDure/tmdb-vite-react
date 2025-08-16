@@ -1,6 +1,7 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
 import App from "./App";
 import type { MoviesByCategory } from "./types";
@@ -23,6 +24,8 @@ store.dispatch({ type: "movies/setMovies", payload: initialData });
 hydrateRoot(
   document.getElementById("root")!,
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );

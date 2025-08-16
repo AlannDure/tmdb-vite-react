@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 //import type { Movie } from "../App";
 import type { Movie } from "../types";
 
@@ -20,10 +22,13 @@ const Carousel: React.FC<CarouselProps> = ({ movies }) => {
       </button>
       {movies.length > 0 && (
         <div className="carousel-card">
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movies[current].poster_path}`}
-            alt={movies[current].title}
-          />
+          <Link to={`/movie/${movies[current].id}`}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movies[current].poster_path}`}
+              alt={movies[current].title}
+            />
+          </Link>
+
           <p>{movies[current].title}</p>
         </div>
       )}

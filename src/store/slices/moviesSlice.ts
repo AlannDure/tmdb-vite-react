@@ -4,8 +4,8 @@ import {
   fetchPopularMovies,
   fetchTopRatedMovies,
   fetchUpcomingMovies,
-} from "../api/tmbd";
-import type { Movie, MoviesByCategory } from "../types";
+} from "../../api/tmbd";
+import type { Movie, MoviesByCategory } from "../../types";
 
 export const fetchMovies = createAsyncThunk("movies/fetchAll", async () => {
   const [popular, topRated, upcoming] = await Promise.all([

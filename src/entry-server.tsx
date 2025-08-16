@@ -1,5 +1,6 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import App from "./App";
@@ -10,7 +11,7 @@ import {
   fetchUpcomingMovies,
 } from "./api/tmbd";
 
-export async function render(): Promise<{
+export async function render(url: string): Promise<{
   html: string;
   initialData: MoviesByCategory;
 }> {
@@ -26,7 +27,9 @@ export async function render(): Promise<{
 
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <StaticRouter location={url}>
+        <App />
+      </StaticRouter>
     </Provider>
   );
 

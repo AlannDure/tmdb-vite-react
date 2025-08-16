@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Carousel from "./Carousel";
-import { fetchMovies } from "../store/moviesSlice";
+import { fetchMovies } from "../store/slices/moviesSlice";
 import type { RootState, AppDispatch } from "../store";
 
 const Home: React.FC = () => {

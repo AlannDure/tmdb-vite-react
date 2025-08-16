@@ -14,7 +14,7 @@ async function startServer() {
 
   app.get("/", async (req, res) => {
     try {
-      const { html, initialData } = await render();
+      const { html, initialData } = await render(req.url);
 
       const fullHtml = `
         <!DOCTYPE html>
