@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Carousel from "./Carousel";
-import type { MoviesByCategory } from "../types";
+import { fetchMovies } from "../store/moviesSlice";
+import type { RootState, AppDispatch } from "../store";
 
-interface HomeProps {
-  movies: MoviesByCategory;
-}
+const Home: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data, loading, error } = useSelector(
+    (state: RootState) => state.movies
+  );
 
-const Home: React.FC<HomeProps> = ({ movies }) => {
+  useEffect(() => {
+    if (!data.popular.length) {
+      dispatch(fetchMovies());
+    }
+  }, []);
+
+  if (loading) return <p>Loading movies...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div className="home">
-      <section>
-        <h2>Popular Movies</h2>
-        <Carousel movies={movies.popular} />
-      </section>
+      <h1>Popular Movies</h1>
+      <Carousel movies={data.popular} />
 
-      <section>
-        <h2>Top Rated Movies</h2>
-        <Carousel movies={movies.topRated} />
-      </section>
+      <h1>Top Rated Movies</h1>
+      <Carousel movies={data.topRated} />
 
-      <section>
-        <h2>Upcoming Movies</h2>
-        <Carousel movies={movies.upcoming} />
-      </section>
+      <h1>Upcoming Movies</h1>
+      <Carousel movies={data.upcoming} />
     </div>
   );
 };
